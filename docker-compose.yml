@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  # app:
+  #   build: .
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - POSTGRES_PASSWORD=${DB_PASS}
+  #     - POSTGRES_USER=${DB_USER}
+  #     - POSTGRES_DB=${DB_NAME}
+  #     - DATABASE_HOST=${DB_HOST}
+  #     - DATABASE_PORT=${DB_PORT}
+  #     - JWT_SECRET=${JWT_SECRET}
+  #   restart: on-failure
+  #   depends_on:
+  #     - db_postgres
+  #   volumes:
+  #     - .:/app
+  db_postgres:
+    image: postgres:13-alpine
+    env_file:
+      - .env
+    ports:
+      - '5435:5432'
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+      - TZ=Asia/Jakarta
+    volumes:
+      - data:/var/lib/postgresql/data
+    restart: always
+volumes:
+  data: {}
